@@ -20,10 +20,13 @@ class Tool(models.Model):
         else:
             raise NotEnoughTools
 
+    def increment_amount(self):
+        self.amount += 1
+
 
 
 class Rental(models.Model):
-    since = models.DateTimeField(auto_now_add=True)
+    since = models.DateTimeField()
     until = models.DateTimeField()
     user = models.ForeignKey(User, related_name='rentals', on_delete=models.CASCADE)
     tool = models.ForeignKey(Tool, related_name='tools', on_delete=models.CASCADE)
