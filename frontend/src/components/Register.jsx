@@ -24,7 +24,7 @@ class Register extends Component {
         <div className='d-flex justify-content-center h-100'>
           <div className='card'>
             <div className='card-header'>
-              <h3>Sign Up</h3>
+              <h3>Sign up</h3>
             </div>
             <div className='card-body'>
               <form>
@@ -55,12 +55,13 @@ class Register extends Component {
                   />
                 </div>
                 <div className='form-group'>
-                  <input
-                    type='submit'
-                    value='Login'
+                  <button
                     className='btn float-right login_btn'
                     onClick={this.handleClick}
-                  />
+                    value='Login'
+                  >
+                    Register
+                  </button>
                 </div>
               </form>
             </div>
