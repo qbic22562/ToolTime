@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/login.css';
+import axios from '../api/API-config';
 
 class Login extends Component {
   constructor() {
@@ -55,12 +56,12 @@ class Login extends Component {
                   />
                 </div>
                 <div className='form-group'>
-                  <input
-                    type='submit'
-                    value='Login'
+                  <button
                     className='btn float-right login_btn'
                     onClick={this.handleClick}
-                  />
+                  >
+                    Login
+                  </button>
                 </div>
               </form>
             </div>
