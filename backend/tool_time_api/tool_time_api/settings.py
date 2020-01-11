@@ -100,8 +100,12 @@ WSGI_APPLICATION = 'tool_time_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tool_time',
+        'USER': 'postgres',
+        'PASSWORD': 'psql_db_2019',
+        'HOST': '34.89.239.19',
+        'PORT': '',
     }
 }
 
