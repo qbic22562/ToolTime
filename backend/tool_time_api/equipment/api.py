@@ -22,6 +22,20 @@ class ToolsAPI(views.APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, format=None):
+        Tool.objects.filter(id=request.data['id']).delete()
+        return Response("Object deleted", status=status.HTTP_200_OK)
+
+    def put(self, request, format=None):
+        serializer = ToolSerializer(data=request.data)
+        if serializer.is_valid():
+            obj = Tool.objects.get(id=request.data['id'])
+            obj.name = serializer.data['name']
+            obj.amount = serializer.data['amount']
+            obj.save()
+            return Response("Update successfull", status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class RentalsAPI(views.APIView):
     permission_classes = [IsAuthenticatedOrReadOnly, ]
