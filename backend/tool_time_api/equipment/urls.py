@@ -4,6 +4,6 @@ from .api import ToolsAPI, RentalsAPI
 
 
 urlpatterns = [
-    path('tools', ToolsAPI.as_view()),
-    path('rentals', RentalsAPI.as_view())
+    path('api/tools', ToolsAPI.as_view()),
+    path('api/rentals', RentalsAPI.as_view())
 ]
