@@ -32,3 +32,5 @@ class Rental(models.Model):
     tool = models.ForeignKey(Tool, related_name='tools', on_delete=models.CASCADE)
 
 
+
+
