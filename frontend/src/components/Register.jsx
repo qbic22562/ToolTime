@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/login.css';
 
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -24,7 +24,7 @@ class Login extends Component {
         <div className='d-flex justify-content-center h-100'>
           <div className='card'>
             <div className='card-header'>
-              <h3>Sign In</h3>
+              <h3>Sign Up</h3>
             </div>
             <div className='card-body'>
               <form>
@@ -76,4 +76,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

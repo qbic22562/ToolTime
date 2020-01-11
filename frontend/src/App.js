@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './components/Login';
-import Login from './components/Login';
+import Router from './routes/Router';
 
 class App extends Component {
   render() {
-    return (
-      <React.Fragment>
-        <Login key='0' />
-      </React.Fragment>
-    );
+    return <Router />;
   }
 }
 
