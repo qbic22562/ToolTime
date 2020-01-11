@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .exceptions import NotEnoughTools
 
 
 class Tool(models.Model):
@@ -12,6 +13,13 @@ class Tool(models.Model):
 
     def __str__(self):
         return '{0}: {1}'.format(self.name, self.amount)
+
+    def decrement_amount(self):
+        if(self.amount > 0):
+            self.amount -= 1
+        else:
+            raise NotEnoughTools
+
 
 
 class Rental(models.Model):
