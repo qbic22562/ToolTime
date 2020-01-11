@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'knox',
     'accounts',
     'equipment',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'tool_time_api.urls'
 
