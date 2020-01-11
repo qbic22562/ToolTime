@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './components/Login';
+import Login from './components/Login';
 
 class App extends Component {
   render() {
-    return <h1>hehe</h1>;
+    return (
+      <React.Fragment>
+        <Login key='0' />
+      </React.Fragment>
+    );
   }
 }
 
