@@ -12,8 +12,8 @@ const Example = ({tools}) => {
                 Choose your tool
             </DropdownToggle>
             <DropdownMenu>
-                {tools.map(item=> {
-                    return <DropdownItem onClick={console.log(item.name)}>{item.name}</DropdownItem>
+                {tools.map(item => {
+                    return <DropdownItem>{item.name}</DropdownItem>
                 })}
             </DropdownMenu>
         </Dropdown>

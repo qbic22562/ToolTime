@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/login.css';
 import { Redirect } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 class Register extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class Register extends Component {
       redirect:false
     };
     this.register = this.register.bind(this);
+    this.redirectToLogin = this.redirectToLogin.bind(this);
   }
 
   handleUsernameChange = event => {
@@ -26,6 +28,10 @@ class Register extends Component {
     this.setState({ password: event.target.value });
   };
 
+  redirectToLogin = () => {
+    this.props.history.push(`/`)
+  };
+
   register(){
     fetch('http://34.89.239.19:8000/api/auth/register', {
       method: 'POST',
@@ -37,11 +43,9 @@ class Register extends Component {
     }).then((response) => {
       alert("You are registered");
       this.setState({redirect: true});
-      console.log(this.state.redirect);
       if (this.state.redirect) {
-        return <Redirect to='/' />
+        this.redirectToLogin()
       }
-      console.log(response)
     }).catch(function (error) {
       console.log(error);
       if (error.response) {
@@ -120,4 +124,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default withRouter(Register);

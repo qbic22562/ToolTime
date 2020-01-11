@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../styles/login.css';
+import {withRouter} from 'react-router-dom';
 
 class Login extends Component {
     constructor() {
@@ -104,4 +105,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);
