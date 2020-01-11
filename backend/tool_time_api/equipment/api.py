@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework import viewsets, views, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -7,11 +8,12 @@ from .exceptions import NotEnoughTools
 from .scheduler import scheduler
 
 
-class ToolsAPI(views.APIView):
+class ToolsListAPI(views.APIView):
     permission_classes = [IsAuthenticatedOrReadOnly, ]
 
     def get(self, request, format=None):
         tools = Tool.objects.all()
+        print(tools)
         serializer = ToolSerializer(tools, many=True)
         return Response(serializer.data)
 
@@ -22,9 +24,22 @@ class ToolsAPI(views.APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class ToolsDetailAPI(views.APIView):
+    def get_object(self, pk):
+        try:
+            return Tool.objects.get(pk=pk)
+        except Tool.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        tool = self.get_object(pk)
+        serializer = ToolSerializer(tool)
+        return Response(serializer.data)
+
     def delete(self, request, format=None):
         Tool.objects.filter(id=request.data['id']).delete()
-        return Response("Object deleted", status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, format=None):
         serializer = ToolSerializer(data=request.data)
@@ -33,11 +48,11 @@ class ToolsAPI(views.APIView):
             obj.name = serializer.data['name']
             obj.amount = serializer.data['amount']
             obj.save()
-            return Response("Update successfull", status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class RentalsAPI(views.APIView):
+class RentalsListAPI(views.APIView):
     permission_classes = [IsAuthenticatedOrReadOnly, ]
 
     def get(self, request, format=None):
@@ -61,6 +76,20 @@ class RentalsAPI(views.APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RentalsDetailAPI(views.APIView):
+    def get_rentals_by_tool_id(self, pk):
+        try:
+            return Rental.objects.filter(tool=pk)
+        except Rental.DoesNotExist:
+            return Http404
+
+    def get(self, request, pk, format=None):
+        rentals = self.get_rentals_by_tool_id(pk)
+        serializer = RentalSerializer(rentals, many=True)
+        return Response(serializer.data)
+
 
 
 def check_dates(request):
