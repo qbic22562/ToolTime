@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import WeekCalendar from './WeekCalendar';
 import moment from 'moment';
 
-class Day extends Component {
+class Hours extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,11 +35,11 @@ class Day extends Component {
     let baseHour = moment(new Date('2020-01-10T00:00:00'));
     let endHour = moment(new Date('2020-01-10T23:00:00'));
     let hoursExtracted = [];
-    do {
+    while (!baseHour.isSame(endHour)) {
       baseHour = baseHour.add(60, 'm').toDate();
       hoursExtracted.push(this.extractHour(baseHour));
       baseHour = moment(baseHour);
-    } while (!baseHour.isSame(endHour));
+    }
     this.setState({ hours: hoursExtracted });
   };
 
@@ -55,8 +55,12 @@ class Day extends Component {
   };
 
   render() {
-    return <div className='d-flex flex-md-column'>{this.printHours()}</div>;
+    return (
+      <div className='d-flex flex-md-column justify-content-center'>
+        {this.printHours()}
+      </div>
+    );
   }
 }
 
-export default Day;
+export default Hours;

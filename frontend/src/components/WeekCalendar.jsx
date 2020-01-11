@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Day from './Day';
 import moment from 'moment';
 import '../styles/main-page.css';
+import Hours from '../components/Hours';
 
 class WeekCalendar extends Component {
   constructor() {
@@ -30,6 +31,7 @@ class WeekCalendar extends Component {
   render() {
     return (
       <div className='d-flex flex-flow-row justify-content-center container-fluid'>
+        <Hours />
         <Day name='Monday' />
         {/* <Day name='Tuesday' />
         <Day name='Wednesday' />
