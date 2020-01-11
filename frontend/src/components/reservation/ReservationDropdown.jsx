@@ -6,7 +6,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-const Example = ({ items, name }) => {
+const ReservationDropdown = ({ items, name }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
@@ -23,4 +23,4 @@ const Example = ({ items, name }) => {
   );
 };
 
-export default Example;
+export default ReservationDropdown;

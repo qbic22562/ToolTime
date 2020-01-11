@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
 import WeekCalendar from './WeekCalendar';
 import moment from 'moment';
+import ReservationData from '../reservation/ReservationData';
 
 class Hours extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: this.props.name,
-      singleReservation: {
-        since: '',
-        until: '',
-        user: '',
-        tool: ''
-      },
-      reservations: [],
-      hours: []
-    };
-  }
+  state = {
+    hours: []
+  };
 
   componentDidMount() {
     this.insertHours();
@@ -32,8 +22,8 @@ class Hours extends Component {
   };
 
   insertHours = () => {
-    let baseHour = moment(new Date('2020-01-10T00:00:00'));
-    let endHour = moment(new Date('2020-01-10T23:00:00'));
+    let baseHour = moment(new Date('2020-01-10T07:00:00'));
+    let endHour = moment(new Date('2020-01-10T18:00:00'));
     let hoursExtracted = [];
     while (!baseHour.isSame(endHour)) {
       baseHour = baseHour.add(60, 'm').toDate();
@@ -58,6 +48,8 @@ class Hours extends Component {
     return (
       <div className='d-flex flex-md-column justify-content-center'>
         {this.printHours()}
+        {console.log(this.state.hours)}
+        <ReservationData hours={this.state.hours} />
       </div>
     );
   }
