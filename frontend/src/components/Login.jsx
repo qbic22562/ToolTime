@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../styles/login.css';
-import axios from '../api/API-config';
 
 class Login extends Component {
   constructor() {
@@ -18,6 +17,18 @@ class Login extends Component {
   handlePasswordChange = event => {
     this.setState({ password: event.target.value });
   };
+
+
+  checkLogin(){
+    fetch('34.89.239.19:8000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+       body: JSON.stringify(this.state.email, this.state.password)
+    });
+  }
 
   render() {
     return (
@@ -56,12 +67,7 @@ class Login extends Component {
                   />
                 </div>
                 <div className='form-group'>
-                  <button
-                    className='btn float-right login_btn'
-                    onClick={this.handleClick}
-                  >
-                    Login
-                  </button>
+                  <button className='btn float-right login_btn' onClick={this.checkLogin}>Login</button>
                 </div>
               </form>
             </div>

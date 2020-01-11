@@ -18,6 +18,18 @@ class Register extends Component {
     this.setState({ password: event.target.value });
   };
 
+  register(){
+    fetch('http://34.89.239.19:8000/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify({username:"username",email:this.state.email, password:this.state.password})
+    });
+  }
+
   render() {
     return (
       <div className='container'>
@@ -54,21 +66,18 @@ class Register extends Component {
                     onChange={event => this.handlePasswordChange(event)}
                   />
                 </div>
+                {console.log(this.state.email)}
+                {console.log(this.state.password)}
                 <div className='form-group'>
                   <button
                     className='btn float-right login_btn'
-                    onClick={this.handleClick}
+                    onClick={this.register}
                     value='Login'
                   >
                     Register
                   </button>
                 </div>
               </form>
-            </div>
-            <div className='card-footer'>
-              <div className='d-flex justify-content-center links'>
-                Don't have an account?<a href='/register'>Sign Up</a>
-              </div>
             </div>
           </div>
         </div>
