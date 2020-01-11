@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-const baseURLEndpoint = 'http://34.89.239.19:8000/api';
+const baseURL = '34.89.239.19:8000';
 
 export default axios.create({
-  baseURL: baseURLEndpoint,
+  baseURL: baseURL,
   headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
+    'Content-Type': 'application/json'
   }
 });

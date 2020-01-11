@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
-import * as moment from 'moment';
 import WeekCalendar from './WeekCalendar';
+import ToolsList from './toolsList/ToolsList';
 
 class MainPage extends Component {
-  state = {
-    date: new Date()
-  };
-
-  onClickDay = date => {
-    console.log(date);
-  };
+  constructor(props) {
+    super(props);
+    this.state = { tools: [] };
+  }
 
   render() {
     return (
       <div>
         {/* <Calendar onClickDay={this.onClickDay} value={this.state.date} /> */}
+        <ToolsList />
         <WeekCalendar />
       </div>
     );
