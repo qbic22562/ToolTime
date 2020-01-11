@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import '../styles/login.css';
+import { Redirect } from 'react-router-dom';
 
 class Register extends Component {
   constructor() {
     super();
     this.state = {
+      username:'',
       email: '',
-      password: ''
+      password: '',
+      redirect:false
     };
+    this.register = this.register.bind(this);
   }
+
+  handleUsernameChange = event => {
+    this.setState({ username: event.target.value });
+  };
 
   handleEmailChange = event => {
     this.setState({ email: event.target.value });
@@ -25,7 +33,22 @@ class Register extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({username:"username",email:this.state.email, password:this.state.password})
+      body: JSON.stringify({username:this.state.username,email:this.state.email, password:this.state.password})
+    }).then((response) => {
+      alert("You are registered");
+      this.setState({redirect: true});
+      console.log(this.state.redirect);
+      if (this.state.redirect) {
+        return <Redirect to='/' />
+      }
+      console.log(response)
+    }).catch(function (error) {
+      console.log(error);
+      if (error.response) {
+        console.log("Upload error. HTTP error/status code=", error.response.status);
+      } else {
+        console.log("Upload error. HTTP error/status code=", error.message);
+      }
     });
   }
 
@@ -49,7 +72,7 @@ class Register extends Component {
                       type='text'
                       className='form-control'
                       placeholder='username'
-                      onChange={event => this.handleEmailChange(event)}
+                      onChange={event => this.handleUsernameChange(event)}
                   />
                 </div>
                 <div className='input-group form-group'>
@@ -78,13 +101,12 @@ class Register extends Component {
                     onChange={event => this.handlePasswordChange(event)}
                   />
                 </div>
-                {console.log(this.state.email)}
-                {console.log(this.state.password)}
                 <div className='form-group'>
                   <button
+                      type="button"
                     className='btn float-right login_btn'
                     onClick={this.register}
-                    value='Login'
+                    value='Register'
                   >
                     Register
                   </button>

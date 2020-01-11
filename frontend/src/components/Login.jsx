@@ -9,6 +9,8 @@ class Login extends Component {
             password: '',
             token: ''
         };
+        this.checkLogin = this.checkLogin.bind(this);
+        this.redirectToHome = this.redirectToHome.bind(this);
     }
 
     handleUsernameChange = event => {
@@ -19,22 +21,32 @@ class Login extends Component {
         this.setState({password: event.target.value});
     };
 
+    redirectToHome = () => {
+        this.props.history.push(`/home`)
+    };
 
     checkLogin() {
-        fetch('34.89.239.19:8000/api/auth/login', {
+        fetch('http://34.89.239.19:8000/api/auth/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({username: this.state.username, password: this.state.password})
-        }).then(function (response) {
-          console.log(response.status)
-                if (response.ok) {
-                  //przechowaj token i przekieruj na strone glowna
-                }
+        }).then((response) => {
+            alert("You are logged in");
+            this.setState({redirect: true});
+            if (this.state.redirect) {
+                this.redirectToHome()
             }
-        )
+        }).catch(function (error) {
+            console.log(error);
+            if (error.response) {
+                console.log("Upload error. HTTP error/status code=", error.response.status);
+            } else {
+                console.log("Upload error. HTTP error/status code=", error.message);
+            }
+        });
     }
 
     render() {
@@ -49,9 +61,9 @@ class Login extends Component {
                             <form>
                                 <div className='input-group form-group'>
                                     <div className='input-group-prepend'>
-                    <span className='input-group-text'>
-                      <i className='fas fa-user'></i>
-                    </span>
+                                        <span className='input-group-text'>
+                                            <i className='fas fa-user'></i>
+                                         </span>
                                     </div>
                                     <input
                                         type='text'
@@ -62,9 +74,9 @@ class Login extends Component {
                                 </div>
                                 <div className='input-group form-group'>
                                     <div className='input-group-prepend'>
-                    <span className='input-group-text'>
-                      <i className='fas fa-key'></i>
-                    </span>
+                                        <span className='input-group-text'>
+                                          <i className='fas fa-key'></i>
+                                        </span>
                                     </div>
                                     <input
                                         type='password'
@@ -74,7 +86,8 @@ class Login extends Component {
                                     />
                                 </div>
                                 <div className='form-group'>
-                                    <button className='btn float-right login_btn' onClick={this.checkLogin}>Login
+                                    <button type="button" className='btn float-right login_btn'
+                                            onClick={this.checkLogin}>Login
                                     </button>
                                 </div>
                             </form>
