@@ -46,8 +46,19 @@ INSTALLED_APPS = [
     'knox',
     'accounts',
     'equipment',
+    'django_apscheduler',
     'corsheaders',
 ]
+
+SCHEDULER_CONFIG = {
+    "apscheduler.jobstores.default": {
+        "class": "django_apscheduler.jobstores:DjangoJobStore"
+    },
+    'apscheduler.executors.processpool': {
+        "type": "threadpool"
+    },
+}
+SCHEDULER_AUTOSTART = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
