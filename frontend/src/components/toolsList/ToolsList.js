@@ -4,7 +4,7 @@ import Example from "./Example";
 class ToolsList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {tools: [], toolNames: []}
+        this.state = {tools: []}
     }
 
     componentDidMount() {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import WeekCalendar from './WeekCalendar';
 import moment from 'moment';
 
 class Hours extends Component {
@@ -32,8 +31,8 @@ class Hours extends Component {
   };
 
   insertHours = () => {
-    let baseHour = moment(new Date('2020-01-10T00:00:00'));
-    let endHour = moment(new Date('2020-01-10T23:00:00'));
+    let baseHour = moment(new Date('2020-01-10T07:00:00'));
+    let endHour = moment(new Date('2020-01-10T18:00:00'));
     let hoursExtracted = [];
     while (!baseHour.isSame(endHour)) {
       baseHour = baseHour.add(60, 'm').toDate();
