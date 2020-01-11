@@ -1,0 +1,7 @@
+.navbar-buttons {
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+}
