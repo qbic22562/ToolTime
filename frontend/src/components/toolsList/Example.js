@@ -13,7 +13,7 @@ const Example = ({tools}) => {
             </DropdownToggle>
             <DropdownMenu>
                 {tools.map(item=> {
-                    return <DropdownItem>{item.name}</DropdownItem>
+                    return <DropdownItem onClick={console.log(item.name)}>{item.name}</DropdownItem>
                 })}
             </DropdownMenu>
         </Dropdown>
