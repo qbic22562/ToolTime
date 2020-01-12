@@ -28,12 +28,10 @@ class ReservationData extends Component {
         'Saturday',
         'Sunday'
       ],
-      selectedDay: 'Monday'
+      chosenDay: 'Monday',
+      startHour: '0:00',
+      endHour: '23:30'
     };
-  }
-
-  handleClick(selectedDay) {
-    this.setState({ selectedDay: selectedDay });
   }
 
   render() {
@@ -44,7 +42,7 @@ class ReservationData extends Component {
             items={this.state.days}
             name='Day of week'
             type='reservation'
-            onClick={() => this.handleClick(this.selectedDay)}
+            onClick={this.handleDayChange}
           />
         </div>
         <div className='d-flex flex-row'>
@@ -54,14 +52,14 @@ class ReservationData extends Component {
             type='reservation'
           />
         </div>
-        <div>
+        <div className='d-flex flex-row'>
           <Example
             items={this.state.hours}
             name='End time'
             type='reservation'
           />
-          <ReservationBtn />
         </div>
+        <ReservationBtn />
       </React.Fragment>
     );
   }
