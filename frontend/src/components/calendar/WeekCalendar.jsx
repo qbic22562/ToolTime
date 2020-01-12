@@ -3,84 +3,48 @@ import Day from './Day';
 import '../../styles/main-page.css';
 import Hours from './Hours';
 import ReservationData from "../reservation/ReservationData";
+import Example from "../toolsList/Example";
 
 class WeekCalendar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            reservations: [
-                {
-                    "id": 1,
-                    "since": "2020-01-14T11:00:00.283000+01:00",
-                    "until": "2020-01-14T15:00:00.283000+01:00",
-                    "user": 1,
-                    "tool": 1
-                },
-                {
-                    "id": 2,
-                    "since": "2020-01-13T13:00:00.283000+01:00",
-                    "until": "2020-01-13T17:00:00.283000+01:00",
-                    "user": 1,
-                    "tool": 1
-                },
-                {
-                    "id": 3,
-                    "since": "2020-01-11T08:00.283000+01:00",
-                    "until": "2020-01-11T12:00:00.283000+01:00",
-                    "user": 1,
-                    "tool": 1
-                }
-            ],
-            hours: ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
+            tools: [{id: 1, name: "hammer", amount: 3}, {id: 2, name: "cos tam", amount: 3}, {
+                id: 3, name: "narzedzie", amount: 3
+            }],
+            reservations: [],
+            mondayReservations:[],
+            tuesdayReservations:[],
+            wednesdayReservations:[],
+            thursdayReservations:[],
+            fridayReservations:[],
+            saturdayReservations:[],
+            sundayReservations:[],
+
+            // hours: ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
         };
     }
 
-
-
-    componentDidMount() {
-        console.log(new Date(this.state.reservations[0].since).getDay())
-        console.log(new Date(this.state.reservations[0].since).getHours())
-        console.log(new Date(this.state.reservations[0].until).getHours())
+    callbackFunction = (childData) => {
+        this.setState({reservations:childData})
     }
-
-
-
-        // let hoursList = this.state.reservations.map((item)=>{
-        //     day:new Date(item.since).getDay();
-        //     since:new Date(item.since).getHours();
-        //     until:new Date(item.until).getHours();
-        // });
-        // this.setState({hours:hoursList})
-
-
-        // cors policy
-        // fetch('http://34.89.239.19:8000/api/rentals/1', {
-        //     method: 'GET',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        // }).then(res => {
-        //     return res.json();
-        // }).then(json => {
-        //     this.setState({
-        //         reservations: json,
-        //     })
-        // });
-
 
     render() {
         return (
             <React.Fragment>
+                <div>
+                    <Example parentCallback = {this.callbackFunction} items={this.state.tools} name='Choose your tool' type='tools'/>
+                </div>
+                {console.log(this.state.reservations)}
                 <div className='d-flex flex-flow-row justify-content-center container-fluid'>
                     <Hours hours={this.state.hours}/>
-                    <Day name='Monday'/>
-                    <Day name='Tuesday'/>
-                    <Day name='Wednesday'/>
-                    <Day name='Thursday'/>
-                    <Day name='Friday'/>
-                    <Day name='Saturday'/>
-                    <Day name='Sunday'/>
+                    <Day name='Monday' reservations={this.state.mondayReservations}/>
+                    <Day name='Tuesday' reservations={this.state.tuesdayReservations}/>
+                    <Day name='Wednesday' reservations={this.state.wednesdayReservations}/>
+                    <Day name='Thursday' reservations={this.state.thursdayReservations}/>
+                    <Day name='Friday' reservations={this.state.fridayReservations}/>
+                    <Day name='Saturday' reservations={this.state.saturdayReservations}/>
+                    <Day name='Sunday' reservations={this.state.sundayReservations}/>
                 </div>
                 <div>
                     <ReservationData hours={this.state.hours} />

@@ -6,7 +6,6 @@ class MainPage extends Component {
   render() {
     return (
       <div>
-        <ToolsList />
         <WeekCalendar />
       </div>
     );
