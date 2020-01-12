@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { UncontrolledTooltip } from 'reactstrap';
 
 class ReservationBtn extends Component {
   constructor(props) {
@@ -15,24 +14,17 @@ class ReservationBtn extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password
+
       })
     })
       .then(response => {
-        alert('You are registered');
-        this.setState({ redirect: true });
-        if (this.state.redirect) {
-          this.redirectToLogin();
-        }
+        alert('zarezerwowano');
       })
       .catch(function(error) {
         console.log(error);
         if (error.response) {
           console.log(
-            'Upload error. HTTP error/status code=',
-            error.response.status
+            'Upload error. HTTP error/status code=', error.response.status
           );
         } else {
           console.log('Upload error. HTTP error/status code=', error.message);
@@ -41,7 +33,7 @@ class ReservationBtn extends Component {
   };
 
   render() {
-    return <button className='btn btn-lg mg-2 btn-success'>Click me</button>;
+    return <button className='btn btn-lg mg-2 btn-success'>Zarezerwuj</button>;
   }
 }
 

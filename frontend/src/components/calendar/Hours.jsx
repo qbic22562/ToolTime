@@ -47,8 +47,6 @@ class Hours extends Component {
     return (
       <div className='d-flex flex-md-column justify-content-center'>
         {this.printHours()}
-        {console.log(this.state.hours)}
-        <ReservationData hours={this.state.hours} />
       </div>
     );
   }

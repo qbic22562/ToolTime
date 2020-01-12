@@ -16,7 +16,7 @@ const Example = ({ items, name }) => {
       <DropdownToggle caret>{name}</DropdownToggle>
       <DropdownMenu>
         {items.map(item => {
-          return <DropdownItem>{item.name}</DropdownItem>;
+          return <DropdownItem key={Math.random()}>{item.name}</DropdownItem>;
         })}
       </DropdownMenu>
     </Dropdown>
