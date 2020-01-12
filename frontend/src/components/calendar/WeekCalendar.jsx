@@ -31,11 +31,20 @@ class WeekCalendar extends Component {
                     "tool": 1
                 }
             ],
-            hours: []
+            hours: ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
         };
     }
 
+
+
     componentDidMount() {
+        console.log(new Date(this.state.reservations[0].since).getDay())
+        console.log(new Date(this.state.reservations[0].since).getHours())
+        console.log(new Date(this.state.reservations[0].until).getHours())
+    }
+
+
+
         // let hoursList = this.state.reservations.map((item)=>{
         //     day:new Date(item.since).getDay();
         //     since:new Date(item.since).getHours();
@@ -43,9 +52,6 @@ class WeekCalendar extends Component {
         // });
         // this.setState({hours:hoursList})
 
-        console.log(new Date(this.state.reservations[0].since).getDay())
-        console.log(new Date(this.state.reservations[0].since).getHours())
-        console.log(new Date(this.state.reservations[0].until).getHours())
 
         // cors policy
         // fetch('http://34.89.239.19:8000/api/rentals/1', {
@@ -61,13 +67,13 @@ class WeekCalendar extends Component {
         //         reservations: json,
         //     })
         // });
-    }
+
 
     render() {
         return (
             <React.Fragment>
                 <div className='d-flex flex-flow-row justify-content-center container-fluid'>
-                    <Hours/>
+                    <Hours hours={this.state.hours}/>
                     <Day name='Monday'/>
                     <Day name='Tuesday'/>
                     <Day name='Wednesday'/>

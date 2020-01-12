@@ -1,26 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
 } from 'reactstrap';
 
-const Example = ({ items, name }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+class Example extends React.Component {
+    constructor(props) {
+        super(props);
+        this.select = this.select.bind(this);
+        this.state = {
+            items: props.items,
+            name: props.name,
+            type: props.type,
+            dropdownOpen: false,
+            value: "Home"
+        };
+    }
 
-  const toggle = () => setDropdownOpen(prevState => !prevState);
+    setDropdownOpen = () => {
+        this.setState({dropdownOpen: !this.state.dropdownOpen})
+    }
 
-  return (
-    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle caret>{name}</DropdownToggle>
-      <DropdownMenu>
-        {items.map(item => {
-          return <DropdownItem key={Math.random()}>{item.name}</DropdownItem>;
-        })}
-      </DropdownMenu>
-    </Dropdown>
-  );
-};
+    select(event, item) {
+        console.log(item)
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen,
+            value: event.target.innerText
+        });
+    }
 
-export default Example;
+    render() {
+        return (
+            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.setDropdownOpen}>
+                <DropdownToggle caret>{this.state.name}</DropdownToggle>
+                <DropdownMenu>
+                    {this.state.items.map(item => {
+                        if(this.state.type === 'tools'){
+                            return <DropdownItem key={Math.random()}
+                                          onClick={(event) => this.select(event, item)}>{item.name}</DropdownItem>
+                        } else{
+                            return <DropdownItem key={Math.random()}
+                                          onClick={(event) => this.select(event, item)}>{item}</DropdownItem>
+                        }
+
+                    })}
+                </DropdownMenu>
+            </Dropdown>
+        );
+    }
+}
+
+export default Example

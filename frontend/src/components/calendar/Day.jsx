@@ -6,36 +6,31 @@ class Day extends Component {
         super(props);
         this.state = {
             name: this.props.name,
-            hours: []
+            hours: ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
         };
-      this.insertHours = this.insertHours.bind(this);
       this.printHours = this.printHours.bind(this);
     }
 
-    componentDidMount() {
 
-        this.insertHours();
-    }
-
-    extractHour = dateObj => {
-        return `${dateObj.getHours()}:${
-            dateObj.getMinutes().toString(10).length === 1
-                ? dateObj.getMinutes() + '0'
-                : dateObj.getMinutes()
-        }`;
-    };
-
-    insertHours = () => {
-        let baseHour = moment(new Date('2020-01-10T07:00:00'));
-        let endHour = moment(new Date('2020-01-10T18:00:00'));
-        let hoursExtracted = [];
-        do {
-            baseHour = baseHour.add(60, 'm').toDate();
-            hoursExtracted.push(this.extractHour(baseHour));
-            baseHour = moment(baseHour);
-        } while (!baseHour.isSame(endHour));
-        this.setState({hours: hoursExtracted});
-    };
+    // extractHour = dateObj => {
+    //     return `${dateObj.getHours()}:${
+    //         dateObj.getMinutes().toString(10).length === 1
+    //             ? dateObj.getMinutes() + '0'
+    //             : dateObj.getMinutes()
+    //     }`;
+    // };
+    //
+    // insertHours = () => {
+    //     let baseHour = moment(new Date('2020-01-10T07:00:00'));
+    //     let endHour = moment(new Date('2020-01-10T18:00:00'));
+    //     let hoursExtracted = [];
+    //     do {
+    //         baseHour = baseHour.add(60, 'm').toDate();
+    //         hoursExtracted.push(this.extractHour(baseHour));
+    //         baseHour = moment(baseHour);
+    //     } while (!baseHour.isSame(endHour));
+    //     this.setState({hours: hoursExtracted});
+    // };
 
 
     printHours = () => {

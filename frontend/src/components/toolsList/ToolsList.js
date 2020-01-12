@@ -32,8 +32,7 @@ class ToolsList extends React.Component {
     render() {
         return (
             <div>
-                <Example items={this.state.tools} name='Choose your tool'/>
-                {/*wyswietlic jakie narzedzie zostalo wybrane !!!!!!!!!*/}
+                <Example items={this.state.tools} name='Choose your tool' type='tools'/>
             </div>
         );
     }
